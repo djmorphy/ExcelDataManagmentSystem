@@ -37,6 +37,50 @@ class RescueDB:
         BottomFrame = Frame(MainFrame, bd=10, width=1350, height=150, padx=14, relief=RIDGE)
         BottomFrame.grid(row=1, column=0)
 
+    #Function
+
+        def update_data():
+            try:
+                df = pd.read_excel('Rescue_Dogs.xlsx')
+                dog_id = dog_id_entry.get()
+                new_data = {
+                             'Dog_ID':[dog_id],
+                             'Dogs_Name':[dog_name_entry.get()],
+                             'Breed':[breed_label_entry.get()],
+                             'Colour':[colour_label_entry.get()],
+                             'Sex':[sex_label_entry.get()],
+                             'Year_of_birth':[year_of_birth_label.get()],
+                             'Number of Dogs':[number_of_dogs_entry.get()]
+                            }
+                new_df = pd.DataFrame(new_data)
+                df = pd.concat([df, new_df], ignore_index=True)
+                df.to_excel("Rescue_Dogs.xlsx", index = False)
+                messagebox.showinfo("Success","Data updated succesfully")
+
+
+                #clear the entry widget
+                reset_entries()
+
+                #Refresh treeview
+                refresh_treeview()
+
+
+
+
+            except Exception as e:
+                messagebox.showerror("Error",str(e))
+
+            def reset_entries():
+                dog_id_entry.delete(0, END)
+                dog_name_entry.delete(0, END)
+                breed_label_entry.delete(0, END)
+                colour_label_entry.delete(0, END)
+                sex_label_entry.delete(0, END)
+                year_of_birth_entry.delete(0, END)
+                number_of_dogs_entry.delete(0, END)
+
+
+
         #Create Title widgets
         dataTitle = Label(TitleFrame, font=('arial', 90, 'bold'), padx=16, text='Excel Data Managment System')
         dataTitle.grid(row=0, column=0)
@@ -160,7 +204,7 @@ class RescueDB:
 
 
 
-        #treeview bind, amire kattintok kijelöli és bedobja az adatokat
+        #Bind function of treeview selection event, amire kattintok kijelöli és bedobja az adatokat
         treeview.bind('<<TreeviewSelect>>', on_treeview_select)
 
 
