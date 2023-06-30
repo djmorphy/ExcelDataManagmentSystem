@@ -49,12 +49,12 @@ class RescueDB:
                              'Breed':[breed_label_entry.get()],
                              'Colour':[colour_label_entry.get()],
                              'Sex':[sex_label_entry.get()],
-                             'Year_of_birth':[year_of_birth_label.get()],
+                             'Year_of_birth':[year_of_birth_entry.get()],
                              'Number of Dogs':[number_of_dogs_entry.get()]
                             }
                 new_df = pd.DataFrame(new_data)
                 df = pd.concat([df, new_df], ignore_index=True)
-                df.to_excel("Rescue_Dogs.xlsx", index = False)
+                df.to_excel("Rescue_Dogs.xlsx", index=False)
                 messagebox.showinfo("Success","Data updated succesfully")
 
 
@@ -80,20 +80,20 @@ class RescueDB:
                 number_of_dogs_entry.delete(0, END)
 
         def refresh_treeview():
-                try:
-                    df = pd.read_excel('Rescue_Dogs.xlsx')
-                    treeview.delete(*treeview.get_children())
-                    for index, row in df.iterrows():
-                        treeview.insert('', 'end', values=(
-                            row['Dog_ID'],
-                            row['Dog_Name'],
-                            row['Breed'],
-                            row['Colour'],
-                            row['Sex'],
-                            row['Year_of_Birth'],
-                            row['Number_of_Dogs']))
-                except Exception as e:
-                    messagebox.showerror("Error", str(e))
+                    try:
+                            df = pd.read_excel('Rescue_Dogs.xlsx')
+                            treeview.delete(*treeview.get_children())
+                            for index, row in df.iterrows():
+                                treeview.insert('', 'end', values=(
+                                    row['Dog_ID'],
+                                    row['Dog_Name'],
+                                    row['Breed'],
+                                    row['Colour'],
+                                    row['Sex'],
+                                    row['Year_of_Birth'],
+                                    row['Number_of_Dogs']))
+                    except Exception as e:
+                        messagebox.showerror("Error", str(e))
 
         def exit_program():
                 result = messagebox.askquestion('Confirm Exit', 'Are you sure you want to exit?')
@@ -165,7 +165,7 @@ class RescueDB:
         add_button = Button(BottomFrame, pady = 1, bd = 4, font=('arial', 40, 'bold'), width=11, height=1, text='Add Data', command=update_data)
         add_button.grid(row=0, column=0,padx=3)
 
-        update_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Update',command=update_data)
+        update_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Update', command=update_data)
         update_button.grid(row=0, column=1,padx=3)
 
         plot_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Plot Graph', command=plot_graph)
@@ -174,7 +174,7 @@ class RescueDB:
         reset_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Reset', command=reset_entries)
         reset_button.grid(row=0, column=3,padx=3)
 
-        exit_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='EXIT', command = exit_program )
+        exit_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='EXIT', command =exit_program )
         exit_button.grid(row=0, column=4,padx=3)
 
     #Create the Treeview widget to display the data
