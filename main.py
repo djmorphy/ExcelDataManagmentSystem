@@ -140,43 +140,28 @@ class RescueDB:
         def on_treeview_select(event):
             selected_item = treeview.focus()
             if selected_item:
-                """   values = treeview.item(selected_item, 'values')
-                          dog_id_entry.delete(0, tk.END)
-                          dog_name_entry.delete(0, tk.END)
-                          breed_label_entry.delete(0, tk.END)
-                          colour_label_entry.delete(0, tk.END)
-                          sex_label_entry.delete(0, tk.END)
-                          year_of_birth_entry.delete(0, tk.END)
-                          number_of_dogs_entry.delete(0, tk.END)
-
-                          dog_id_entry.insert(0, values[0])
-                          dog_name_entry.insert(0, values[1])
-                          breed_label_entry.insert(0, values[2])
-                          colour_label_entry.insert(0, values[3])
-                          sex_label_entry.insert(0, values[4])
-                          year_of_birth_entry.insert(0, values[5])
-                          number_of_dogs_entry.insert(0, values[6]) """
-
                 values = treeview.item(selected_item, 'values')
                 dog_id_entry.delete(0, tk.END)
                 dog_name_entry.delete(0, tk.END)
-                breed_entry.delete(0, tk.END)
-                colour_entry.delete(0, tk.END)
-                sex_entry.delete(0, tk.END)
+                breed_label_entry.delete(0, tk.END)
+                colour_label_entry.delete(0, tk.END)
+                sex_label_entry.delete(0, tk.END)
                 year_of_birth_entry.delete(0, tk.END)
                 number_of_dogs_entry.delete(0, tk.END)
 
                 dog_id_entry.insert(0, values[0])
                 dog_name_entry.insert(0, values[1])
-                breed_entry.insert(0, values[2])
-                colour_entry.insert(0, values[3])
-                sex_entry.insert(0, values[4])
+                breed_label_entry.insert(0, values[2])
+                colour_label_entry.insert(0, values[3])
+                sex_label_entry.insert(0, values[4])
                 year_of_birth_entry.insert(0, values[5])
                 number_of_dogs_entry.insert(0, values[6])
 
 
-                #treeview bind, amire kattintok kijelöli
-                treeview.bind('<<TreeviewSelect>>', on_treeview_select)
+
+
+        #treeview bind, amire kattintok kijelöli és bedobja az adatokat
+        treeview.bind('<<TreeviewSelect>>', on_treeview_select)
 
 
 
