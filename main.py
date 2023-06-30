@@ -70,7 +70,7 @@ class RescueDB:
             except Exception as e:
                 messagebox.showerror("Error",str(e))
 
-            def reset_entries():
+        def reset_entries():
                 dog_id_entry.delete(0, END)
                 dog_name_entry.delete(0, END)
                 breed_label_entry.delete(0, END)
@@ -79,7 +79,7 @@ class RescueDB:
                 year_of_birth_entry.delete(0, END)
                 number_of_dogs_entry.delete(0, END)
 
-            def refresh_treeview():
+        def refresh_treeview():
                 try:
                     df = pd.read_excel('Rescue_Dogs.xlsx')
                     treeview.delete(*treeview.get_children())
@@ -95,10 +95,25 @@ class RescueDB:
                 except Exception as e:
                     messagebox.showerror("Error", str(e))
 
-            def exit_program()
+        def exit_program():
                 result = messagebox.askquestion('Confirm Exit', 'Are you sure you want to exit?')
                 if result == 'yes':
                     root.destroy()
+
+        def plot_graph():
+                try:
+                    df = pd.read_excel('Rescue_Dogs.xlsx')
+                    df.plot(x='Year_of_Birth', y='Number_of_Dogs', kind='bar')
+                    plt.xlabel('Year of Birth')
+                    plt.ylabel('Number of Dogs')
+                    plt.title('Rescue dogs Data')
+                    plt.show()
+
+                except Exception as e:
+                    messagebox.showerror("Error", str(e))
+
+
+
         #Create Title widgets
         dataTitle = Label(TitleFrame, font=('arial', 90, 'bold'), padx=16, text='Excel Data Managment System')
         dataTitle.grid(row=0, column=0)
@@ -147,19 +162,19 @@ class RescueDB:
 
     #Create the buttons
 
-        add_button = Button(BottomFrame, pady = 1, bd = 4, font=('arial', 40, 'bold'), width=11, height=1, text='Add Data')
+        add_button = Button(BottomFrame, pady = 1, bd = 4, font=('arial', 40, 'bold'), width=11, height=1, text='Add Data', command=update_data)
         add_button.grid(row=0, column=0,padx=3)
 
-        update_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Update')
+        update_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Update',command=update_data)
         update_button.grid(row=0, column=1,padx=3)
 
-        plot_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Plot Graph')
+        plot_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Plot Graph', command=plot_graph)
         plot_button.grid(row=0, column=2,padx=3)
 
-        reset_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Reset')
+        reset_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='Reset', command=reset_entries)
         reset_button.grid(row=0, column=3,padx=3)
 
-        exit_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='EXIT')
+        exit_button = Button(BottomFrame, pady=1, bd=4, font=('arial', 40, 'bold'), width=11, height=1, text='EXIT', command = exit_program )
         exit_button.grid(row=0, column=4,padx=3)
 
     #Create the Treeview widget to display the data
