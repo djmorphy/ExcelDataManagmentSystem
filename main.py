@@ -79,8 +79,26 @@ class RescueDB:
                 year_of_birth_entry.delete(0, END)
                 number_of_dogs_entry.delete(0, END)
 
+            def refresh_treeview():
+                try:
+                    df = pd.read_excel('Rescue_Dogs.xlsx')
+                    treeview.delete(*treeview.get_children())
+                    for index, row in df.iterrows():
+                        treeview.insert('', 'end', values=(
+                            row['Dog_ID'],
+                            row['Dog_Name'],
+                            row['Breed'],
+                            row['Colour'],
+                            row['Sex'],
+                            row['Year_of_Birth'],
+                            row['Number_of_Dogs']))
+                except Exception as e:
+                    messagebox.showerror("Error", str(e))
 
-
+            def exit_program()
+                result = messagebox.askquestion('Confirm Exit', 'Are you sure you want to exit?')
+                if result == 'yes':
+                    root.destroy()
         #Create Title widgets
         dataTitle = Label(TitleFrame, font=('arial', 90, 'bold'), padx=16, text='Excel Data Managment System')
         dataTitle.grid(row=0, column=0)
